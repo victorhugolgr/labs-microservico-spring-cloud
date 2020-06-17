@@ -8,5 +8,5 @@ spring:
         encrypt:
             enabled: false
         git:
-          uri: https://github.com/arthur-alura/microservice-repo/
-          search-paths: fornecedor
+          uri: https://github.com/victorhugolgr/labs-microservico-spring-cloud
+          search-paths: config_server_files
