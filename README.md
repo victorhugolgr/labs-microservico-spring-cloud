@@ -12,3 +12,9 @@
   * [:open_file_folder: transportador](https://github.com/victorhugolgr/labs-microservico-spring-cloud/tree/master/transportador);
   * [:open_file_folder: fornecedor](https://github.com/victorhugolgr/labs-microservico-spring-cloud/tree/master/fornecedor).
 
+> :bulb: Projeto configurado com o banco de dados MySql
+
+> Executar MySql via docker. 
+> ```shell
+> docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql 
+> ```
