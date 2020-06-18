@@ -12,6 +12,8 @@
   * [:open_file_folder: transportador](https://github.com/victorhugolgr/labs-microservico-spring-cloud/tree/master/transportador);
   * [:open_file_folder: fornecedor](https://github.com/victorhugolgr/labs-microservico-spring-cloud/tree/master/fornecedor).
 
+> [:closed_book: Documentação](https://explore.postman.com/templates/9632/spring-cloud-labs) da API do projeto
+
 > :bulb: Projeto configurado com o banco de dados MySql
 
 > Executar MySql via docker. 
