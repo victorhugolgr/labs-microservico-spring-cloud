@@ -1,0 +1,92 @@
+version: '3'
+services: 
+    mysql:
+        image: mysql:latest
+        ports: 
+            - "3306:3306"
+        command: --init-file /data/application/init.sql
+        volumes: 
+            - ./init.sql:/data/application/init.sql
+        environment: 
+            MYSQL_ROOT_PASSWORD: root
+        networks: 
+            - microservico-network
+    microservico-auth:
+        build: 
+            dockerfile: ./Dockerfile
+            context: ./auth
+        image: victorhugolgr/microservico-auth
+        container_name: microservico-auth
+        ports: 
+            - "8088:8088"
+        networks: 
+            - microservico-network
+    microservico-config-server:
+        build: 
+            dockerfile: ./Dockerfile
+            context: ./config-server
+        image: victorhugolgr/microservico-config-server
+        container_name: microservico-config-server
+        ports: 
+            - "8888:8888"
+        networks: 
+            - microservico-network
+    microservico-eureka-server:
+        build: 
+            dockerfile: ./Dockerfile
+            context: ./eureka-server
+        image: victorhugolgr/microservico-eureka-server
+        container_name: microservico-eureka-server
+        ports: 
+            - "8761:8761"
+        networks: 
+            - microservico-network
+    microservico-fornecedor:
+        build: 
+            dockerfile: ./Dockerfile
+            context: ./fornecedor
+        image: victorhugolgr/microservico-fornecedor
+        container_name: microservico-fornecedor
+        ports: 
+            - "8081:8081"
+        networks: 
+            - microservico-network
+        links:
+            - microservico-config-server:microservico-config-server
+            - microservico-eureka-server:microservico-eureka-server
+            - mysql:mysql
+        depends_on: 
+            - "microservico-config-server"
+            - "microservico-eureka-server"
+            - "mysql"
+    microservico-loja:
+        build: 
+            dockerfile: ./Dockerfile
+            context: ./loja
+        image: victorhugolgr/microservico-loja
+        container_name: microservico-loja
+        ports: 
+            - "8080:8080"
+        networks: 
+            - microservico-network
+        depends_on: 
+            - "microservico-config-server"
+            - "mysql"
+    microservico-transportador:
+        build: 
+            dockerfile: ./Dockerfile
+            context: ./transportador
+        image: victorhugolgr/microservico-transportador
+        container_name: microservico-transportador
+        ports: 
+            - "8083:8083"
+        networks: 
+            - microservico-network
+        depends_on: 
+            - "microservico-config-server"
+            - "mysql"
+        
+
+networks:
+    microservico-network :
+        driver: bridge
