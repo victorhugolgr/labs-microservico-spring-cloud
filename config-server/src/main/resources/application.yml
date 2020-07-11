@@ -1,12 +1,12 @@
 
-server:  port: 8888
+server:
+  port: 8888
   
 spring:
   cloud:
     config:
+      fail-fast: true
       server:
-        encrypt:
-            enabled: false
         git:
           uri: https://github.com/victorhugolgr/labs-microservico-spring-cloud
           search-paths: config_server_files
